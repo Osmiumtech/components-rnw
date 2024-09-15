@@ -6,7 +6,7 @@ import React from "react";
 import { Button, ButtonProps } from "@rneui/themed";
 import { StyledIcon } from "./IconButton.js";
 import { Ionicons } from "@expo/vector-icons";
-import { useAsync } from "@dwidge/hooks-react";
+import { useAsync } from "@osmiumtech/hooks-react";
 import { notifyError } from "./notify.js";
 
 export const StyledButton = ({

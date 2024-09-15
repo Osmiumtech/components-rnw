@@ -8,18 +8,18 @@ importers:
 
   .:
     dependencies:
-      '@backpackapp-io/react-native-toast':
-        specifier: ^0.11.0
-        version: 0.11.0(react-native-gesture-handler@2.19.0(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.5)(react@18.3.1)(typescript@5.6.2))(react@18.3.1))(react-native-reanimated@3.15.1(@babel/core@7.25.2)(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.5)(react@18.3.1)(typescript@5.6.2))(react@18.3.1))(react-native-safe-area-context@4.11.0(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.5)(react@18.3.1)(typescript@5.6.2))(react@18.3.1))(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.5)(react@18.3.1)(typescript@5.6.2))(react@18.3.1)
-      '@dwidge/hooks-react':
-        specifier: ^0.0.1
-        version: 0.0.1(react@18.3.1)
-      '@dwidge/utils-js':
-        specifier: ^0.0.1
-        version: 0.0.1
       '@expo/vector-icons':
         specifier: ^14.0.2
         version: 14.0.2
+      '@osmiumtech/hooks-react':
+        specifier: ^0.0.1
+        version: 0.0.1(react@18.3.1)
+      '@osmiumtech/react-native-toast':
+        specifier: ^0.11.0
+        version: 0.11.0(react-native-gesture-handler@2.19.0(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.5)(react@18.3.1)(typescript@5.6.2))(react@18.3.1))(react-native-reanimated@3.15.1(@babel/core@7.25.2)(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.5)(react@18.3.1)(typescript@5.6.2))(react@18.3.1))(react-native-safe-area-context@4.11.0(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.5)(react@18.3.1)(typescript@5.6.2))(react@18.3.1))(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.5)(react@18.3.1)(typescript@5.6.2))(react@18.3.1)
+      '@osmiumtech/utils-js':
+        specifier: ^0.0.3
+        version: 0.0.3
       '@react-native-picker/picker':
         specifier: ^2.8.0
         version: 2.8.0(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.5)(react@18.3.1)(typescript@5.6.2))(react@18.3.1)
@@ -741,23 +741,6 @@ packages:
     resolution: {integrity: sha512-/l42B1qxpG6RdfYf343Uw1vmDjeNhneUXtzhojE7pDgfpEypmRhI6j1kr17XCVv4Cgl9HdAiQY2x0GwKm7rWCw==}
     engines: {node: '>=6.9.0'}
 
-  '@backpackapp-io/react-native-toast@0.11.0':
-    resolution: {integrity: sha512-ZRVYQPK6QOvt6vP1bF0I5oBpN5pnssdrX1JLV+KHPyxXWSNNvl1oo0qdJ5uzM7zj2TxMMUBPIsMofFeLA8E/dw==}
-    peerDependencies:
-      react: '*'
-      react-native: '*'
-      react-native-gesture-handler: '>=2.2.1'
-      react-native-reanimated: '>=2.8.0'
-      react-native-safe-area-context: '>=4.2.4'
-
-  '@dwidge/hooks-react@0.0.1':
-    resolution: {integrity: sha512-J5uhEKOcrHE4ZYviGZBCwORWlb4gXtXZGj1bUrvmLnXds8+7xbGxarjwNnOi6/4nh/PUWqKSYZbp3sEfgwQhkQ==}
-    peerDependencies:
-      react: ^18.2
-
-  '@dwidge/utils-js@0.0.1':
-    resolution: {integrity: sha512-0adpNFL131jMCIL50KdkZU7rm5FfZ6k88tAzqATBibWUei6yJzTUHgMW/5r8dgeRaGrhk+ojQ4yaDnVg7lC1EA==}
-
   '@egjs/hammerjs@2.0.17':
     resolution: {integrity: sha512-XQsZgjm2EcVUiZQf11UBJQfmZeEmOW8DpI1gsFeln6w0ae0ii4dMQEQ0kjl6DspdWX1aGY1/loyXnP0JS06e/A==}
     engines: {node: '>=0.8.0'}
@@ -839,6 +822,26 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
+
+  '@osmiumtech/hooks-react@0.0.1':
+    resolution: {integrity: sha512-Y0lfGT0FqdnQR94UiamuoPDX6yQGSjJ4RIKe+Wg7ShQz8xXItkC4TMo8LwCKwQmteFhodA4oPCBfjQ3SrXw8PA==, tarball: https://npm.pkg.github.com/download/@osmiumtech/hooks-react/0.0.1/c6c05fa7c04304f6cf5242dfce04a2314affa136}
+    engines: {node: '>=20'}
+    peerDependencies:
+      react: ^18.2
+
+  '@osmiumtech/react-native-toast@0.11.0':
+    resolution: {integrity: sha512-+XQ88dV39cEVoW4Jalu5e8izkoxF8dNkT5cFBF02s74fpEw5YHBL/rCjanjW8zw/QYWon7gX030to6RqjFOBTA==, tarball: https://npm.pkg.github.com/download/@osmiumtech/react-native-toast/0.11.0/db2b2c21d123121f027853df7caf9f652780d335}
+    engines: {node: '>=20'}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+      react-native-gesture-handler: '>=2.2.1'
+      react-native-reanimated: '>=2.8.0'
+      react-native-safe-area-context: '>=4.2.4'
+
+  '@osmiumtech/utils-js@0.0.3':
+    resolution: {integrity: sha512-xY6Jrqx3onVsHSaLjyaaJET9Ts/oJMNPLQN6KDqQRdPyr6RR8X/QQKyeUSZPGRWQ+SP3CZecWYCKpmxDLHTVlA==, tarball: https://npm.pkg.github.com/download/@osmiumtech/utils-js/0.0.3/220c3c79c3f5ea1bf042b34a6ee3e6f635f28ed2}
+    engines: {node: '>=20'}
 
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
@@ -3584,20 +3587,6 @@ snapshots:
       '@babel/helper-validator-identifier': 7.24.7
       to-fast-properties: 2.0.0
 
-  '@backpackapp-io/react-native-toast@0.11.0(react-native-gesture-handler@2.19.0(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.5)(react@18.3.1)(typescript@5.6.2))(react@18.3.1))(react-native-reanimated@3.15.1(@babel/core@7.25.2)(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.5)(react@18.3.1)(typescript@5.6.2))(react@18.3.1))(react-native-safe-area-context@4.11.0(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.5)(react@18.3.1)(typescript@5.6.2))(react@18.3.1))(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.5)(react@18.3.1)(typescript@5.6.2))(react@18.3.1)':
-    dependencies:
-      react: 18.3.1
-      react-native: 0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.5)(react@18.3.1)(typescript@5.6.2)
-      react-native-gesture-handler: 2.19.0(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.5)(react@18.3.1)(typescript@5.6.2))(react@18.3.1)
-      react-native-reanimated: 3.15.1(@babel/core@7.25.2)(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.5)(react@18.3.1)(typescript@5.6.2))(react@18.3.1)
-      react-native-safe-area-context: 4.11.0(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.5)(react@18.3.1)(typescript@5.6.2))(react@18.3.1)
-
-  '@dwidge/hooks-react@0.0.1(react@18.3.1)':
-    dependencies:
-      react: 18.3.1
-
-  '@dwidge/utils-js@0.0.1': {}
-
   '@egjs/hammerjs@2.0.17':
     dependencies:
       '@types/hammerjs': 2.0.45
@@ -3701,6 +3690,20 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.17.1
+
+  '@osmiumtech/hooks-react@0.0.1(react@18.3.1)':
+    dependencies:
+      react: 18.3.1
+
+  '@osmiumtech/react-native-toast@0.11.0(react-native-gesture-handler@2.19.0(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.5)(react@18.3.1)(typescript@5.6.2))(react@18.3.1))(react-native-reanimated@3.15.1(@babel/core@7.25.2)(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.5)(react@18.3.1)(typescript@5.6.2))(react@18.3.1))(react-native-safe-area-context@4.11.0(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.5)(react@18.3.1)(typescript@5.6.2))(react@18.3.1))(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.5)(react@18.3.1)(typescript@5.6.2))(react@18.3.1)':
+    dependencies:
+      react: 18.3.1
+      react-native: 0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.5)(react@18.3.1)(typescript@5.6.2)
+      react-native-gesture-handler: 2.19.0(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.5)(react@18.3.1)(typescript@5.6.2))(react@18.3.1)
+      react-native-reanimated: 3.15.1(@babel/core@7.25.2)(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.5)(react@18.3.1)(typescript@5.6.2))(react@18.3.1)
+      react-native-safe-area-context: 4.11.0(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.5)(react@18.3.1)(typescript@5.6.2))(react@18.3.1)
+
+  '@osmiumtech/utils-js@0.0.3': {}
 
   '@pkgjs/parseargs@0.11.0':
     optional: true

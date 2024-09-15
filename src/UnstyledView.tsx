@@ -4,7 +4,7 @@
 
 import React from "react";
 import { View, ViewStyle, ViewProps } from "react-native";
-import { FlagKeysFromRecordKeys } from "@dwidge/utils-js";
+import { FlagKeysFromRecordKeys } from "@osmiumtech/utils-js";
 
 export type UnstyledViewProps<Styles extends ViewStyleSheet = { default: {} }> =
   {

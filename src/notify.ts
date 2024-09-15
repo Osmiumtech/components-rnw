@@ -2,7 +2,7 @@
 // Distributed under the Boost Software License, Version 1.0.
 // https://www.boost.org/LICENSE_1_0.txt
 
-import { toast } from "@backpackapp-io/react-native-toast";
+import { toast } from "@osmiumtech/react-native-toast";
 import { userErrorMessage } from "./userErrorMessage.js";
 import { logContextError } from "./ContextError.js";
 

@@ -6,7 +6,7 @@ import React from "react";
 import { ColorValue, View } from "react-native";
 import { StyledView, StyledViewProps } from "./StyledView.js";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Toasts } from "@backpackapp-io/react-native-toast";
+import { Toasts } from "@osmiumtech/react-native-toast";
 import { withTheme } from "@rneui/themed";
 
 export type ScreenViewProps = {
