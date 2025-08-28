@@ -15,7 +15,7 @@ export type ScreenViewProps = {
 
 export const ScreenView = withTheme(
   ({ children, backgroundColor, ...props }: ScreenViewProps) => (
-    <SafeAreaView style={{ flex: 1, backgroundColor }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor, marginTop: -11 }}>
       <View style={{ zIndex: 1 }}>
         <Toasts />
       </View>
