@@ -20,6 +20,9 @@ export const textStyles = StyleSheet.create({
   },
   link: { color: "blue" },
   error: { color: "red" },
+  xl: {
+    fontSize: 36,
+  },
   l: {
     fontSize: 30,
   },
@@ -78,6 +81,8 @@ export const textStyles = StyleSheet.create({
     borderTopLeftRadius: 12,
   },
   flex: { flex: 1 },
+  outline: { borderColor: "grey", borderWidth: 1 },
+  highlight: { color: "white", backgroundColor: "grey" },
   redBg: { backgroundColor: "red" },
   greenBg: { backgroundColor: "green" },
   orangeBg: { backgroundColor: "orange" },
@@ -92,5 +97,5 @@ export const StyledText = withTheme(
   (props: Omit<StyledTextProps, "stylesheet">) => (
     <UnstyledText stylesheet={textStyles} {...props} />
   ),
-  "StyledText"
-);
+  "StyledText",
+) as React.FC<Omit<StyledTextProps, "stylesheet">>;

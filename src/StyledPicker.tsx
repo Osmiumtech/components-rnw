@@ -2,37 +2,136 @@
 // Distributed under the Boost Software License, Version 1.0.
 // https://www.boost.org/LICENSE_1_0.txt
 
-import React from "react";
-import { Colors, Theme, useTheme } from "@rneui/themed";
+import { AsyncDispatch, AsyncState } from "@dwidge/hooks-react";
 import { Picker } from "@react-native-picker/picker";
+import { Colors, Theme, useTheme, withTheme } from "@rneui/themed";
+import { StyleProp, TextStyle } from "react-native";
+import { StyledLoader } from "./StyledLoader";
 
-export const StyledPicker = <T,>({
-  value,
-  onChange,
+export const StyledStringPicker = <T extends string | number | boolean>({
+  value: [value, onChange],
   options,
   theme = useTheme().theme,
+  style,
+  unknownLabel,
 }: {
-  value: T;
-  onChange?: (v: (prev: T) => T) => unknown;
+  value: AsyncState<T>;
   options?: { label: string; value: T }[];
   theme?: {
     colors: Colors;
   } & Theme;
-}) => (
-  <Picker
-    selectedValue={value}
-    onValueChange={(v) => onChange?.(() => v)}
-    style={{
-      fontSize: 16,
-      color: theme.colors.black,
-      backgroundColor: theme.colors.white,
-    }}
-  >
-    {value == undefined || value === "" ? (
-      <Picker.Item label="None" value={undefined} />
-    ) : null}
-    {options?.map((option, index) => (
-      <Picker.Item key={index} label={option.label} value={option.value} />
-    ))}
-  </Picker>
-);
+  style?: StyleProp<TextStyle>;
+  unknownLabel?: string;
+}) => {
+  if (value === undefined) {
+    return <StyledLoader />;
+  }
+
+  let valueMatchesOption = false;
+  if (options) {
+    for (const option of options) {
+      if (option.value === value) {
+        valueMatchesOption = true;
+        break;
+      }
+    }
+  }
+
+  if (!valueMatchesOption && unknownLabel === undefined) {
+    throw new Error(
+      "StyledStringPickerE1: value does not match any option and unknownLabel is not provided.",
+      { cause: { value, options } },
+    );
+  }
+
+  return (
+    <Picker
+      selectedValue={value}
+      onValueChange={onChange ? (v) => onChange(() => v) : undefined}
+      style={[
+        {
+          color: theme.colors.black,
+          backgroundColor: theme.colors.white,
+        },
+        style,
+      ]}
+    >
+      {unknownLabel && !valueMatchesOption && (
+        <Picker.Item label={unknownLabel} value={value} />
+      )}
+      {options?.map((option, index) => (
+        <Picker.Item key={index} label={option.label} value={option.value} />
+      ))}
+    </Picker>
+  );
+};
+
+export type JsonValue =
+  | string
+  | number
+  | boolean
+  | null
+  | { [x: string]: JsonValue }
+  | JsonValue[];
+
+export const StyledJsonPicker = <JsonValueType extends JsonValue>({
+  value: [value, onChange],
+  options,
+  theme = useTheme().theme,
+  style,
+  unknownLabel,
+}: {
+  value: AsyncState<JsonValueType>;
+  options?: { label: string; value: JsonValueType }[];
+  theme?: {
+    colors: Colors;
+  } & Theme;
+  style?: StyleProp<TextStyle>;
+  unknownLabel?: string;
+}) => {
+  const stringifiedValue =
+    value === undefined ? undefined : JSON.stringify(value);
+
+  const stringifiedOptions = options?.map((option) => ({
+    ...option,
+    value: JSON.stringify(option.value),
+    label: option.label,
+  }));
+
+  const stringifiedOnChange: AsyncDispatch<string> | undefined =
+    value !== undefined && onChange
+      ? async (getV) => {
+          const prevStringifiedV = stringifiedValue;
+          const newStringifiedV = await (typeof getV === "function"
+            ? getV(prevStringifiedV!)
+            : getV);
+          const parsedNewV: JsonValueType = JSON.parse(
+            newStringifiedV as string,
+          );
+          onChange((prev) => parsedNewV);
+          return newStringifiedV;
+        }
+      : undefined;
+
+  return (
+    <StyledStringPicker<string>
+      value={[stringifiedValue, stringifiedOnChange]}
+      options={stringifiedOptions}
+      theme={theme}
+      style={style}
+      unknownLabel={unknownLabel}
+    />
+  );
+};
+
+export type StyledPickerProps<JsonValueType extends JsonValue> = {
+  value: AsyncState<JsonValueType>;
+  options?: { label: string; value: JsonValueType }[];
+  unknownLabel?: string;
+  style?: StyleProp<TextStyle>;
+};
+
+export const StyledPicker = withTheme(
+  (props: StyledPickerProps<any>) => <StyledJsonPicker {...props} />,
+  "StyledPicker",
+) as React.FC<StyledPickerProps<any>>;

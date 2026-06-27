@@ -1,44 +1,85 @@
-// Copyright DWJ 2024.
-// Distributed under the Boost Software License, Version 1.0.
-// https://www.boost.org/LICENSE_1_0.txt
-
-import { Ionicons } from "@expo/vector-icons";
-import { ColorValue } from "react-native";
-import { useTheme, withTheme } from "@rneui/themed";
+import { useAsync } from "@dwidge/hooks-react";
+import { sleep } from "@dwidge/utils-js";
+import { withTheme } from "@rneui/themed";
+import { PropsWithChildren, useContext, useMemo } from "react";
+import {
+  ColorValue,
+  StyleProp,
+  TouchableOpacity,
+  ViewStyle,
+} from "react-native";
+import { EventErrorHandlerContext } from "./EventErrorHandler";
+import { getIconComponent, IconGlyph } from "./IconName";
+import { StyledView } from "./StyledView";
 
 export type IconButtonProps = {
-  icon: keyof typeof Ionicons.glyphMap;
-  onPress?: () => void;
+  name?: IconGlyph;
+  onPress?: () => unknown | Promise<unknown>;
   size?: number;
   color?: ColorValue;
   disabledColor?: ColorValue;
-};
+  style?: StyleProp<ViewStyle>;
+  testID?: string;
+} & PropsWithChildren;
 
 export const IconButton = withTheme(
-  ({ icon, onPress, color, disabledColor }: IconButtonProps) => (
-    <Ionicons
-      name={icon}
-      size={24}
-      color={onPress ? color : disabledColor}
-      style={{ padding: 10 }}
-      onPress={onPress}
-    />
-  ),
-  "IconButton"
-);
+  ({
+    name,
+    onPress,
+    size = 20,
+    color,
+    disabledColor,
+    style,
+    children,
+    ...props
+  }: IconButtonProps) => {
+    const onError = useContext(EventErrorHandlerContext);
 
-export const StyledIcon = ({
-  theme = useTheme(),
-  icon,
-  ...props
-}: IconButtonProps & {
-  theme?: ReturnType<typeof useTheme>;
-}): JSX.Element | null => (
-  <Ionicons
-    name={icon}
-    size={24}
-    color={theme.theme.colors.primary}
-    style={{ paddingHorizontal: 10 }}
-    {...props}
-  />
+    const [onPressLoader, loading2] = useAsync(
+      onPress
+        ? async () => {
+            await sleep(0);
+            try {
+              return await onPress();
+            } catch (e) {
+              onError(e);
+            }
+          }
+        : undefined,
+    );
+
+    const IconComponent = useMemo(
+      () => getIconComponent(name as string),
+      [name],
+    );
+
+    return (
+      <TouchableOpacity onPress={onPressLoader} style={style}>
+        <StyledView
+          flex
+          center
+          middle
+          row
+          sgap
+          style={[
+            { padding: 10, margin: -10, opacity: onPressLoader ? 1 : 0.2 },
+          ]}
+        >
+          <IconComponent
+            name={name as any}
+            size={size}
+            color={onPressLoader ? color : disabledColor}
+            style={{
+              width: size,
+              height: size,
+              backgroundColor: "transparent",
+            }}
+            {...props}
+          />
+          {children}
+        </StyledView>
+      </TouchableOpacity>
+    );
+  },
+  "IconButton",
 );

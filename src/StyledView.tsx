@@ -2,10 +2,10 @@
 // Distributed under the Boost Software License, Version 1.0.
 // https://www.boost.org/LICENSE_1_0.txt
 
+import { withTheme } from "@rneui/themed";
 import React from "react";
 import { StyleSheet } from "react-native";
-import { UnstyledViewProps, UnstyledView } from "./UnstyledView.js";
-import { withTheme } from "@rneui/themed";
+import { UnstyledView, UnstyledViewProps } from "./UnstyledView.js";
 
 export const viewStyles = StyleSheet.create({
   default: {},
@@ -13,6 +13,7 @@ export const viewStyles = StyleSheet.create({
   flex3: { flex: 3 },
   wrap: { flexWrap: "wrap" },
   overflowHidden: { overflow: "hidden" },
+  rounded: { overflow: "hidden", borderRadius: 8 },
   row: { flexDirection: "row", alignItems: "center" },
   column: { flexDirection: "column" },
   left: { alignItems: "flex-start" },
@@ -34,14 +35,24 @@ export const viewStyles = StyleSheet.create({
   pad: { padding: 20 },
   hpad: { paddingHorizontal: 20, paddingVertical: 10 },
   nhmargin: { marginHorizontal: -20 },
+  nhsmargin: { marginHorizontal: -10 },
+  nmargin: { margin: -20 },
   spad: { padding: 10 },
+  xspad: { padding: 5 },
   outline: { borderWidth: 1 },
+  background: { backgroundColor: "#fff" },
+  backgroundAlpha: { backgroundColor: "#fffe" },
+  section: { backgroundColor: "#8882" },
+  darker: { backgroundColor: "#8882" },
+  nest: { backgroundColor: "#8882", padding: 20, marginHorizontal: -20 },
+  extend: { paddingHorizontal: 20, marginHorizontal: -20 },
+  extends: { paddingHorizontal: 15, marginHorizontal: -15 },
   minWidth: { minWidth: 150, width: "100%" },
   narrow: { maxWidth: 300, width: "100%" },
-  wide: { maxWidth: 600, width: "100%" },
+  wide: { maxWidth: 720, width: "100%" },
   selfcenter: { alignSelf: "center" },
   hidden: { height: 0 },
-  mediumSquare: { width: 120, height: 120 },
+  mediumSquare: { minWidth: 120, minHeight: 120 },
   card: {
     flex: 1,
     padding: 10,
@@ -49,6 +60,13 @@ export const viewStyles = StyleSheet.create({
     borderWidth: 0.5,
     borderRadius: 8 * 1,
     borderColor: "grey",
+  },
+  select: {
+    backgroundColor: "blue",
+    padding: 10,
+  },
+  unselect: {
+    padding: 10,
   },
 });
 
@@ -58,5 +76,5 @@ export const StyledView = withTheme(
   (props: Omit<StyledViewProps, "stylesheet">) => (
     <UnstyledView stylesheet={viewStyles} {...props} />
   ),
-  "StyledView"
-);
+  "StyledView",
+) as React.FC<Omit<StyledViewProps, "stylesheet">>;

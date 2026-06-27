@@ -1,36 +1,49 @@
-// Copyright DWJ 2024.
-// Distributed under the Boost Software License, Version 1.0.
-// https://www.boost.org/LICENSE_1_0.txt
+import { useAsync } from "@dwidge/hooks-react";
+import { sleep } from "@dwidge/utils-js";
+import { Button, ButtonProps, useTheme } from "@rneui/themed";
+import { useContext } from "react";
+import { EventErrorHandlerContext } from "./EventErrorHandler.js";
+import { IoniconsGlyph } from "./IconName.js";
+import { StyledIcon } from "./StyledIcon.js";
 
-import React from "react";
-import { Button, ButtonProps } from "@rneui/themed";
-import { StyledIcon } from "./IconButton.js";
-import { Ionicons } from "@expo/vector-icons";
-import { useAsync } from "@osmiumtech/hooks-react";
-import { notifyError } from "./notify.js";
+export type StyledButtonProps = Omit<ButtonProps, "onPress" | "icon"> & {
+  onPress?: () => unknown;
+  onError?: (e: unknown) => unknown;
+  icon?: IoniconsGlyph;
+  disabledColor?: string;
+  iconColor?: string;
+};
 
 export const StyledButton = ({
-  icon,
   onPress,
+  onError = useContext(EventErrorHandlerContext),
   loading = undefined,
-  loader: [onPressLoader, loading2, error] = useAsync(
-    onPress ? async () => onPress() : undefined
-  ),
+  disabled = !onPress,
+  icon,
+  disabledColor = useTheme()?.theme?.colors.greyOutline,
+  iconColor = disabled ? disabledColor : "white",
   ...props
-}: Omit<ButtonProps, "onPress" | "icon"> & {
-  onPress?: () => unknown;
-  icon?: keyof typeof Ionicons.glyphMap;
-  loader?: [
-    f: ((...args: any[]) => Promise<any>) | undefined,
-    busy: boolean,
-    error: Error | undefined
-  ];
-}) => (
-  <Button
-    loading={loading || loading2}
-    icon={icon && <StyledIcon icon={icon} />}
-    onPress={() => onPressLoader?.().catch((e) => notifyError(e))}
-    disabled={!onPressLoader}
-    {...props}
-  />
-);
+}: StyledButtonProps) => {
+  const [onPressLoader, loading2] = useAsync(
+    onPress
+      ? async () => {
+          await sleep(0);
+          try {
+            return await onPress();
+          } catch (e) {
+            onError(e);
+          }
+        }
+      : undefined,
+  );
+
+  return (
+    <Button
+      loading={loading || loading2}
+      icon={icon && <StyledIcon icon={icon} color={iconColor} />}
+      onPress={onPressLoader}
+      disabled={disabled}
+      {...props}
+    />
+  );
+};
